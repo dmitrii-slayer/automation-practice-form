@@ -42,8 +42,8 @@ public class FormTests {
         $("#subjectsInput").setValue("Arts").pressEnter();
         $("#subjectsInput").setValue("Hindi").pressEnter();
         // select hobbies
-        $("[for=hobbies-checkbox-2]").click();
-        $("[for=hobbies-checkbox-3]").click();
+        $("#hobbiesWrapper").$(byText("Reading")).click();
+        $("#hobbiesWrapper").$(byText("Music")).click();
         // upload picture
         $("#uploadPicture").uploadFile(new File("src/test/resources/me.jpg"));
 //        $("#uploadPicture").sendKeys();
