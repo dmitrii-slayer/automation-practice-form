@@ -16,7 +16,7 @@ public class TestData {
     public String email = faker.internet().emailAddress(firstName.toLowerCase() + "." + lastName.toLowerCase());
     public String gender = genderRandom();
     public String phone = faker.phoneNumber().subscriberNumber(10);
-    public String birthDay = String.valueOf(faker.number().numberBetween(1, 28));
+    public String birthDay = String.format("%02d", faker.number().numberBetween(1,28));
     public String birthMonth = monthRandom();
     public String birthYear = String.valueOf(faker.number().numberBetween(1970, 2010));
     public String subject = "Math";
