@@ -2,54 +2,41 @@ package tests;
 
 import org.junit.jupiter.api.Test;
 import pages.RegistrationPage;
+import testdata.TestData;
 
 
 public class RegistrationFormTests extends TestBase {
 
     RegistrationPage registrationPage = new RegistrationPage();
-
-    private String firstName = "Egor",
-            lastName = "Pupkin",
-            userEmail = "egorpupkin@fakemail.com",
-            userGender = "Male",
-            userPhone = "9876543210",
-            userBirthDay = "21",
-            userBirthMonth = "June",
-            userBirthYear = "1987",
-            subjects = "Art",
-            hobbies = "Reading",
-            imagePath = "me.jpg",
-            currentAddress = "Test address 123 building 0",
-            userState = "Haryana",
-            userCity = "Panipat";
+    TestData testData = new TestData();
 
     @Test
     void successfulRegistration() {
 
         registrationPage.openPage()
-                .setFirstName(firstName)
-                .setLastName(lastName)
-                .setEmail(userEmail)
-                .setGender(userGender)
-                .setPhone(userPhone)
-                .setBirthDay(userBirthDay, userBirthMonth, userBirthYear)
-                .setSubject(subjects)
-                .setHobbie(hobbies)
-                .uploadPicture(imagePath)
-                .setCurrentAddress(currentAddress)
-                .selectState(userState)
-                .selectCity(userCity)
+                .setFirstName(testData.firstName)
+                .setLastName(testData.lastName)
+                .setEmail(testData.email)
+                .setGender(testData.gender)
+                .setPhone(testData.phone)
+                .setBirthDay(testData.birthDay, testData.birthMonth, testData.birthYear)
+                .setSubject(testData.subject)
+                .setHobbie(testData.hobbie)
+                .uploadPicture(testData.picturePath)
+                .setCurrentAddress(testData.address)
+                .selectState(testData.state)
+                .selectCity(testData.city)
                 .submitForm()
                 .verifyResultModule()
-                .verifyResultValue("Student Name", firstName + " " + lastName)
-                .verifyResultValue("Student Email", userEmail)
-                .verifyResultValue("Gender", userGender)
-                .verifyResultValue("Mobile", userPhone)
-                .verifyResultValue("Date of Birth", userBirthDay + " " + userBirthMonth + "," + userBirthYear)
-                .verifyResultValue("Subjects", subjects)
-                .verifyResultValue("Hobbies", hobbies)
-                .verifyResultValue("Picture", imagePath)
-                .verifyResultValue("Address", currentAddress)
-                .verifyResultValue("State and City", userState + " " + userCity);
+                .verifyResultValue("Student Name", testData.firstName + " " + testData.lastName)
+                .verifyResultValue("Student Email", testData.email)
+                .verifyResultValue("Gender", testData.gender)
+                .verifyResultValue("Mobile", testData.phone)
+                .verifyResultValue("Date of Birth", testData.birthDay + " " + testData.birthMonth + "," + testData.birthYear)
+                .verifyResultValue("Subjects", testData.subject)
+                .verifyResultValue("Hobbies", testData.hobbie)
+                .verifyResultValue("Picture", testData.picturePath)
+                .verifyResultValue("Address", testData.address)
+                .verifyResultValue("State and City", testData.state + " " + testData.city);
     }
 }
