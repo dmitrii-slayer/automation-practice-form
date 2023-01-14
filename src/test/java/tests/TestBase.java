@@ -20,11 +20,11 @@ public class TestBase {
         Configuration.pageLoadTimeout = 10000;
         Configuration.browser = System.getProperty("browser", "chrome");
 //        Configuration.holdBrowserOpen = true;
-//        Configuration.remote =  System.getProperty("remoteUrl", "https://user1:1234@selenoid.autotests.cloud") +"/wd/hub";;
+        Configuration.remote =  System.getProperty("remoteUrl", "https://user1:1234@selenoid.autotests.cloud") +"/wd/hub";;
 //
         DesiredCapabilities capabilities = new DesiredCapabilities();
-//        capabilities.setCapability("enableVNC", true);
-//        capabilities.setCapability("enableVideo", true);
+        capabilities.setCapability("enableVNC", true);
+        capabilities.setCapability("enableVideo", true);
         capabilities.setBrowserName(Configuration.browser);
         capabilities.setVersion(browserVersion);
         Configuration.browserCapabilities = capabilities;
