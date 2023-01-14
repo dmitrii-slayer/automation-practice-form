@@ -6,38 +6,68 @@ plugins {
 repositories {
     mavenCentral()
 }
+
+ext {
+    allureVersion = '2.20.0'
+    junitVersion = '5.9.0'
+    selenideVersion = '6.10.3'
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(11)
+    }
+}
+
+compileJava {
+    options.encoding = "UTF-8"
+}
+
+compileTestJava {
+    options.encoding = "UTF-8"
+}
+
 allure {
     report {
-        version.set("2.19.0")
+        version.set("$allureVersion")
     }
     adapter { // отвечает за появление папочки build/allure-results
         aspectjWeaver.set(true) //обработка аннотации @Step
         frameworks {
             junit5 { //название фреймворка
-                adapterVersion.set("2.19.0") //версия интеграции фреймворка и Allure
+                adapterVersion.set("$allureVersion") //версия интеграции фреймворка и Allure
             }
         }
     }
 }
 
-tasks.withType(JavaCompile) {
-    options.encoding = 'UTF-8'
-}
 
 dependencies {
     testImplementation(
-            "com.codeborne:selenide:6.9.0",
-            "org.junit.jupiter:junit-jupiter:5.8.2",
+            "org.junit.jupiter:junit-jupiter:${junitVersion}",
+            "com.codeborne:selenide:${selenideVersion}",
+            "com.codeborne:selenide-full-screenshot:${selenideVersion}",
             "com.github.javafaker:javafaker:1.0.2",
-            "io.qameta.allure:allure-selenide:2.19.0"
+            "io.qameta.allure:allure-selenide:${allureVersion}",
+            "org.aeonbits.owner:owner:1.0.12"
     )
+
     testRuntimeOnly(
-            'org.slf4j:slf4j-simple:2.0.5')
+            "org.slf4j:slf4j-simple:2.0.5"
+    )
+
+    testCompileOnly(
+            "org.projectlombok:lombok:1.18.24"
+    )
+
+    testAnnotationProcessor(
+            "org.projectlombok:lombok:1.18.24"
+    )
 }
 
 tasks.withType(Test) {
     useJUnitPlatform()
-
+    systemProperties(System.getProperties())
     testLogging {
         lifecycle {
             events "started", "skipped", "failed", "standard_error", "standard_out"
