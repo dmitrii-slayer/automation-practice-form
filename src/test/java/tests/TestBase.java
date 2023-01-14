@@ -13,7 +13,7 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 public class TestBase {
     @BeforeAll
     static void beforeAll() {
-        String[] browserSettings = System.getProperty("browser", "chrome 100").split("\\s+");
+        String[] browserSettings = System.getProperty("browser", "chrome 100.0").split(" ");
         String browserName = browserSettings[0];
         String browserVersion = browserSettings[1];
         Configuration.baseUrl = "https://demoqa.com";
