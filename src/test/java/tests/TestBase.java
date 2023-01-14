@@ -13,15 +13,17 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 public class TestBase {
     @BeforeAll
     static void beforeAll() {
-        String browserVersion = System.getProperty("browserVersion", "100.0");
+        String[] browserSettings = System.getProperty("browser", "chrome 100").split("\\s+");
+        String browserName = browserSettings[0];
+        String browserVersion = browserSettings[1];
         Configuration.baseUrl = "https://demoqa.com";
         Configuration.browserSize = System.getProperty("browserSize", "1920x1080");
         Configuration.timeout = 10000;
         Configuration.pageLoadTimeout = 10000;
-        Configuration.browser = System.getProperty("browser", "chrome");
+        Configuration.browser = System.getProperty(browserName, "chrome");
 //        Configuration.holdBrowserOpen = true;
         Configuration.remote =  System.getProperty("remoteUrl", "https://user1:1234@selenoid.autotests.cloud") +"/wd/hub";;
-//
+
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability("enableVNC", true);
         capabilities.setCapability("enableVideo", true);
