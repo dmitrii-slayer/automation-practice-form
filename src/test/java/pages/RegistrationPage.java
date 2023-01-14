@@ -27,6 +27,7 @@ public class RegistrationPage {
             birthdayElement = $("#dateOfBirthInput"),
             calendarPanel = $(".react-datepicker__month-container"),
             subjectsElement = $("#subjectsInput"),
+            subjectsFirstElement = $("#react-select-2-option-0"), // первый элемент из предложенного списка
             hobbiesElement = $("#hobbiesWrapper"),
             currentAddressElement = $("#currentAddress"),
             stateCityBlock = $("#stateCity-wrapper"),
@@ -83,7 +84,12 @@ public class RegistrationPage {
     }
 
     public RegistrationPage setSubject(String value) {
-        subjectsElement.setValue(value).pressEnter();
+//        subjectsElement.setValue(value).pressEnter(); // плохо работает в firefox
+//        (двойное нажатие Enter?, происходит submit)
+
+        // КОСТЫЛЬ ДЛЯ FIREFOX
+        subjectsElement.setValue(value);
+        subjectsFirstElement.click();
 
         return this;
     }
