@@ -132,9 +132,16 @@ public class RegistrationPage {
         return this;
     }
 
+    public RegistrationPage verifyModuleNotVisible() {
+        registerResultsModule.verifyModuleNotVisible(RESULT_MODULE_TITLE);
+
+        return this;
+    }
+
     public RegistrationPage verifyResultValue(String key, String value) {
         registerResultsModule.verifyResult(key, value);
 
         return this;
     }
+
 }

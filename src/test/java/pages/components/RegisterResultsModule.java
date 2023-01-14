@@ -12,6 +12,11 @@ public class RegisterResultsModule {
         $("#example-modal-sizes-title-lg").shouldHave(text(title));
     }
 
+    public void verifyModuleNotVisible(String title) {
+
+        $(".modal-dialog").shouldNot(appear);
+    }
+
     public void verifyResult(String key, String value) {
         $(".table-responsive").$(byText(key)).parent().shouldHave(text(value));
     }

@@ -10,7 +10,7 @@ public class RegistrationFormTests extends TestBase {
     RegistrationPage registrationPage = new RegistrationPage();
     TestData testData = new TestData();
 
-    @Test
+    @Test()
     void successfulRegistration() {
 
         registrationPage.openPage()
@@ -38,5 +38,16 @@ public class RegistrationFormTests extends TestBase {
                 .verifyResultValue("Picture", testData.picturePath)
                 .verifyResultValue("Address", testData.address)
                 .verifyResultValue("State and City", testData.state + " " + testData.city);
+    }
+
+
+    @Test()
+    void unsuccessfulRegistration() {
+
+        registrationPage.openPage()
+                .setFirstName(testData.firstName)
+                .setLastName(testData.lastName)
+                .submitForm()
+                .verifyModuleNotVisible();
     }
 }
