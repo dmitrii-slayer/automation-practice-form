@@ -13,7 +13,8 @@ public class TestData {
 
     public String firstName = faker.name().firstName();
     public String lastName = faker.name().lastName();
-    public String email = faker.internet().emailAddress(firstName.toLowerCase() + "." + lastName.toLowerCase());
+    public String email = faker.internet().emailAddress(
+            (firstName.toLowerCase() + "." + "'"+ lastName.toLowerCase()).replace("'", ""));
     public String gender = genderRandom();
     public String phone = faker.phoneNumber().subscriberNumber(10);
     public String birthDay = String.format("%02d", faker.number().numberBetween(1, 28));
