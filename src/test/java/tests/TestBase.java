@@ -10,6 +10,8 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
+import java.util.Map;
+
 public class TestBase {
     @BeforeAll
     static void beforeAll() {
@@ -18,15 +20,19 @@ public class TestBase {
         String browserVersion = browserSettings[1];
         Configuration.baseUrl = "https://demoqa.com";
         Configuration.browserSize = System.getProperty("browserSize", "1920x1080");
-        Configuration.timeout = 10000;
-        Configuration.pageLoadTimeout = 10000;
-        Configuration.browser = System.getProperty(browserName, "chrome");
+        Configuration.timeout = 20000;
+        Configuration.pageLoadTimeout = 20000;
+        Configuration.browser = browserName;
 //        Configuration.holdBrowserOpen = true;
         Configuration.remote =  System.getProperty("remoteUrl", "https://user1:1234@selenoid.autotests.cloud") +"/wd/hub";;
 
         DesiredCapabilities capabilities = new DesiredCapabilities();
-        capabilities.setCapability("enableVNC", true);
-        capabilities.setCapability("enableVideo", true);
+//        capabilities.setCapability("enableVNC", true);
+//        capabilities.setCapability("enableVideo", true);
+        capabilities.setCapability("selenoid:options", Map.<String, Object>of(
+                "enableVNC", true,
+                "enableVideo", true
+        ));
         capabilities.setVersion(browserVersion);
         Configuration.browserCapabilities = capabilities;
 
