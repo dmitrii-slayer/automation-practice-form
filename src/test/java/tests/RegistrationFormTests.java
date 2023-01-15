@@ -7,7 +7,7 @@ import testdata.TestData;
 
 import static io.qameta.allure.Allure.step;
 
-
+@DisplayName("Тесты на форму регистрации automation-practice-form")
 public class RegistrationFormTests extends TestBase {
 
     RegistrationPage registrationPage = new RegistrationPage();
