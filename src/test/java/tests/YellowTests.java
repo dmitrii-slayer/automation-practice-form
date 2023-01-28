@@ -1,17 +1,48 @@
 package tests;
 
 import com.codeborne.selenide.Configuration;
+import com.codeborne.selenide.logevents.SelenideLogger;
+import io.qameta.allure.selenide.AllureSelenide;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.openqa.selenium.remote.DesiredCapabilities;
 
 import java.io.File;
+import java.util.Map;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 
 
-public class YellowTests extends TestBase{
+public class YellowTests {
+
+    @BeforeAll
+    static void beforeAll() {
+        String[] browserSettings = System.getProperty("browser", "chrome 100.0").split(" ");
+        String browserName = browserSettings[0];
+        String browserVersion = browserSettings[1];
+        Configuration.baseUrl = "https://demoqa.com";
+        Configuration.browserSize = System.getProperty("browserSize", "1920x1080");
+        Configuration.timeout = 10000;
+        Configuration.pageLoadTimeout = 10000;
+        Configuration.browser = browserName;
+//        Configuration.holdBrowserOpen = true;
+        Configuration.remote = "https://localhost:8080/wd/hub";;
+
+        DesiredCapabilities capabilities = new DesiredCapabilities();
+//        capabilities.setCapability("enableVNC", true);
+//        capabilities.setCapability("enableVideo", true);
+        capabilities.setCapability("selenoid:options", Map.<String, Object>of(
+                "enableVNC", true,
+                "enableVideo", true
+        ));
+        capabilities.setVersion(browserVersion);
+        Configuration.browserCapabilities = capabilities;
+
+
+        SelenideLogger.addListener("AllureSelenide", new AllureSelenide());
+    }
 
     @Test
     void fillFormYellow1Test() {
