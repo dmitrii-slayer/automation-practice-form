@@ -46,4 +46,9 @@ public class SimpleTests {
         assertTrue(true);
     }
 
+    @Test
+    void positiveAssert9Test() {
+        assertTrue(true);
+    }
+
 }
