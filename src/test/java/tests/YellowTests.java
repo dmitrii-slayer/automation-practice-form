@@ -11,13 +11,7 @@ import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 
 
-public class YellowTests {
-
-    @BeforeAll
-    static void configure() {
-        Configuration.browserSize = "1920x1080";
-//        Configuration.holdBrowserOpen = true;
-    }
+public class YellowTests extends TestBase{
 
     @Test
     void fillFormYellow1Test() {
